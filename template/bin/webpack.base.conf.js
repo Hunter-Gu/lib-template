@@ -4,11 +4,13 @@ const { isdev, paths: { src, cache }, env, [env]: { assetsRoot, publicPath } } =
 const base = require('./base')
 const loaders = require('./loaders')
 const plugins = require('./plugins')
+const loaderWithPlugins = require('./loader-with-plugins.js')
 const { getFilename } = require('./utils')
 
 const configs = []
 
 const jsLoader = loaders.getJsLoaders(cache)
+const tsLoaderWithPlugins = loaderWithPlugins.getTsLoaderWithPlugins()
 
 const definePlugin = plugins.getDefinePlugin()
 const cleanPlugin = plugins.getCleanPlugin(assetsRoot)
@@ -28,13 +30,13 @@ configs.push(Object.assign({}, base, {
     alias: config.alias,
     modules: ['node_modules'],
     mainFields: ['main', 'module', 'browser'],
-    extensions: ['.js', '.json']
+    extensions: ['.js', '.json', '.ts']
   },
   externals: config.externals,
   module: {
-    rules: [jsLoader]
+    rules: [tsLoaderWithPlugins.loaders, jsLoader]
   },
-  plugins: [definePlugin, cleanPlugin]
+  plugins: [definePlugin, cleanPlugin, ...tsLoaderWithPlugins.plugins]
 }))
 
 module.exports = configs
