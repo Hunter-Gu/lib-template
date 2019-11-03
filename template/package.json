@@ -5,6 +5,7 @@
   "scripts": {
     "start": "cross-env HMR=true NODE_ENV=development PARALLEL=true WEBPACK=all webpack --inline --config ./bin/webpack.dev.conf.js",
     "build": "cross-env NODE_ENV=production PARALLEL=true webpack --config ./bin/webpack.prod.conf.js",
+    "lint": "eslint --ext .js,.vue src",
     "doc": "docsify serve ./docs",
     "serve:doc": ""
   },
@@ -23,6 +24,10 @@
     {{/if_eq}}
     "friendly-errors-webpack-plugin": "^1.7.0",
     "prettyjson": "^1.2.1",
+    "babel-eslint": "^10.0.3",
+    "eslint": "^6.5.1",
+    "eslint-loader": "^3.0.2",
+    "eslint-plugin-vue": "^5.2.3",
     "typescript": "^3.3.4000",
     "awesome-typescript-loader": "^5.2.1",
     "webpack": "^4.29.5",

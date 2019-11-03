@@ -10,6 +10,7 @@ const { getFilename } = require('./utils')
 const configs = []
 
 const jsLoader = loaders.getJsLoaders(cache)
+const eslintLoader = loaders.getEslintLoader()
 const tsLoaderWithPlugins = loaderWithPlugins.getTsLoaderWithPlugins()
 
 const definePlugin = plugins.getDefinePlugin()
@@ -34,7 +35,7 @@ configs.push(Object.assign({}, base, {
   },
   externals: config.externals,
   module: {
-    rules: [tsLoaderWithPlugins.loaders, jsLoader]
+    rules: [tsLoaderWithPlugins.loaders, eslintLoader, jsLoader]
   },
   plugins: [definePlugin, cleanPlugin, ...tsLoaderWithPlugins.plugins]
 }))
